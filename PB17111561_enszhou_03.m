@@ -1,0 +1,13 @@
+X = [0.25 0.5 0.75 1 1.25 1.5 1.75 2 2.25 2.5];
+Y = [1.284 1.648 2.117 2.718 3.427 2.798 3.534 4.456 5.465 5.894];
+sin_X = sin(X);
+cos_X = cos(X);
+r = sum(sin_X .* cos_X);
+p = sum(sin_X .^ 2);
+q = sum(cos_X .^ 2);
+s = sum(sin_X .* Y);
+t = sum(cos_X .* Y);
+a = (t*r-s*q)/(r^2-p*q);
+b = (s*r-t*p)/(r^2-p*q);
+mse = sum((a*sin_X + b*cos_X - Y) .^ 2)/length(X);
+fprintf("a = %.15e, b = %.15e, MSE = %.15e ", a, b, mse);
